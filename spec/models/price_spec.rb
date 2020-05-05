@@ -48,4 +48,8 @@ RSpec.describe Price, type: :model do
       end
     end
   end
+
+  describe 'Associations' do
+    it { should belong_to(:currency_pair).without_validating_presence }
+  end
 end
