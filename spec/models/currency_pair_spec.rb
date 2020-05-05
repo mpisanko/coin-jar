@@ -21,4 +21,8 @@ RSpec.describe CurrencyPair, type: :model do
     subject.currency_1 = 'ETH'
     expect { subject.save }.to raise_error(ActiveRecord::ReadOnlyRecord)
   end
+
+  it 'concatenates currency_1 and currency_2 to show string' do
+    expect(subject.to_s).to eq('BTCAUD')
+  end
 end

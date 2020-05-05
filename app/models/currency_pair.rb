@@ -6,4 +6,8 @@ class CurrencyPair < ApplicationRecord
   def readonly?
     !new_record?
   end
+
+  def to_s
+    "#{currency_1}#{currency_2}"
+  end
 end
