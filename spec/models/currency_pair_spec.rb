@@ -1,5 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe CurrencyPair, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { described_class.new({ currency_1: 'BTC', currency_2: 'AUD' }) }
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
+  end
+
+  it 'is not valid without currency_1' do
+    subject.currency_1 = nil
+    expect(subject).to_not be_valid
+  end
+
+  it 'is not valid without currency_2' do
+    subject.currency_2 = nil
+    expect(subject).to_not be_valid
+  end
 end
