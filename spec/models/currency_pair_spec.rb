@@ -15,4 +15,10 @@ RSpec.describe CurrencyPair, type: :model do
     subject.currency_2 = nil
     expect(subject).to_not be_valid
   end
+
+  it 'is immutable after creation' do
+    subject.save
+    subject.currency_1 = 'ETH'
+    expect { subject.save }.to raise_error(ActiveRecord::ReadOnlyRecord)
+  end
 end
