@@ -1,0 +1,7 @@
+<h1>Current Prices of CoinJar Currencies</h1>
+<%= render 'top_menu' %>
+<div class="content">
+  <div class="currencies">
+    <%= render partial: 'currency_prices', collection: currencies, as: 'currency' %>
+  </div>
+</div>

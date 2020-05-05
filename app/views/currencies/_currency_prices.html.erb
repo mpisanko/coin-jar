@@ -1,0 +1,11 @@
+<div class="currency-price">
+  <div><h2><%= currency.to_s %></h2></div>
+  <% if currency.latest %>
+    <div class="currency-row">
+      <span>Date</span>
+      <span><%= currency.latest.price_at %></span>
+    </div>
+  <% else %>
+    <span>No data available. Click 'Capture' button.</span>
+  <% end %>
+</div>

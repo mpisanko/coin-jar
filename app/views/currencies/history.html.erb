@@ -1,0 +1,7 @@
+<h1>CoinJar <%= @currency %> History</h1>
+<%= render 'top_menu' %>
+<div class="content">
+  <div class="prices">
+    <%= render partial: 'prices', locals: { prices: prices } %>
+  </div>
+</div>

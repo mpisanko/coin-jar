@@ -1,0 +1,65 @@
+// Place all the styles related to the Currencies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.top {
+  height: 66px;
+  width: 50%;
+  display: flex;
+  align-content: flex-start;
+  flex-flow: row wrap;
+}
+.capture {
+  margin: auto;
+  margin-left: 20px;
+  margin-right: 0px;
+  margin-top: 0px;
+  width: 20%;
+}
+.capture-button {
+  background-color: cadetblue;
+  font-size: medium;
+  color: lightgray;
+  width: 120px;
+  height: 30px;
+  -webkit-border-radius: 6;  -moz-border-radius: 6;  border-radius: 6px;
+}
+.currency-button {
+  background-color: khaki;
+  font-size: medium;
+  margin-left: 20px;
+  color: dimgrey;
+  width: 90px;
+  height: 30px;
+  -webkit-border-radius: 6;  -moz-border-radius: 6;  border-radius: 6px;
+}
+.history-button {
+  background-color: white;
+  color: darkslategrey;
+  font-size: medium;
+  border: 0px;
+}
+.explain {
+  margin: auto;
+  margin-left: 0px;
+  font-size: large;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  line-height: 30px;
+}
+.content {
+  width: 70%;
+}
+.currencies {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.currency-price {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
