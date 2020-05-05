@@ -3,7 +3,7 @@ class CurrencyPair < ApplicationRecord
 
   validates_presence_of :currency_1, :currency_2
 
-  # def readonly?
-  #   !new_record?
-  # end
+  def readonly?
+    !new_record?
+  end
 end
