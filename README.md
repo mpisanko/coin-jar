@@ -21,10 +21,6 @@ Only current_time, ask, bid, last will be stored as that's the requirement given
 Once currency pair or price record is created - it will not be updated - these are facts that do not change. They happen and cannot unhappen ;)
 Price represents a stream of changes of the prices of a currency pair.
 
-## Running
-Before running the application for the first time it's required to seed the database in order to create currencies that we want to check.
-
-
 ## Deliverables
 A git bundle containing your source file, test data and test code
 
