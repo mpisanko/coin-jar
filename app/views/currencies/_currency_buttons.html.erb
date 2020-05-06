@@ -1,3 +1,4 @@
-<div class="history" onclick="window.location='/currencies/history?currency=<%= currency %>'">
+<div class="history <%= 'disabled' if @currency == currency %>"
+     onclick='<%= "window.location='/currencies/history?currency=#{currency}'" unless @currency == currency %>'>
   <div class="text-block-2"><%= currency %></div>
 </div>
