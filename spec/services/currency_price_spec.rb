@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CurrencyPrice do
   subject { described_class.new }
+  # let(:currencies) { %w[ETHAUD BTCAUD] }
   let(:response) { RestClient::Response.new }
   describe 'btc' do
     let!(:btc) { CurrencyPair.new(currency_1: 'BTC', currency_2: 'AUD').tap(&:save) }
@@ -24,6 +25,28 @@ RSpec.describe CurrencyPrice do
         saved = Price.last
         expect(saved.bid).to eq(14040.0)
         expect(saved.currency_pair.to_s).to eq('BTCAUD')
+      end
+    end
+
+    context 'failed request' do
+      before do
+        allow(RestClient).to receive(:get).with(CurrencyPrice::TICKER % 'BTCAUD').and_raise(RestClient::NotFound)
+      end
+      it 'returns currency symbol mapped to nil' do
+        expect(subject.btc).to eq({ btc: nil })
+      end
+    end
+
+    context 'problem saving price' do
+      let(:price) {double(Price)}
+      before do
+        allow(RestClient).to receive(:get).with(CurrencyPrice::TICKER % 'BTCAUD').and_return(response)
+        allow(response).to receive(:body).and_return(btc_price)
+        allow(Price).to receive(:new).and_return(price)
+        allow(price).to receive(:save).and_raise(ActiveRecord::RecordInvalid)
+      end
+      it 'returns currency symbol mapped to nil' do
+        expect(subject.btc).to eq({ btc: nil })
       end
     end
   end
