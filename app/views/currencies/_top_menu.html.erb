@@ -4,7 +4,7 @@
   </form>
 
   <form class="explain" action="/currencies/history" method="get">
-    <input class="history-button" type="submit" value="History"/>
-    <%= render partial: 'currency_buttons', collection: currencies, as: 'currency' %>
+    <input class="history-button" type="submit" value="History" disabled />
+    <%= render partial: 'currency_buttons', collection: @currencies, as: 'currency' %>
   </form>
 </div>
