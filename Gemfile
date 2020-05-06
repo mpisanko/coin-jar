@@ -28,13 +28,16 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'rest-client', '>= 2.1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # static code analysis
   gem 'rubocop', '~> 0.82.0', require: false
-  # Rspec Helper
+  # Rspec
   gem 'rspec-rails', ">= 4.0.0"
+  gem 'rspec-mocks', '>= 3.9.1'
   gem 'shoulda-matchers'
 end
 
