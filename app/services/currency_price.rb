@@ -7,40 +7,40 @@ class CurrencyPrice
   # In spite of GIL and Ruby's lack of REAL Threads - this HTTP requests are
   # IO bound so it's OK to 'multithread' here
   def call
-    %i[eth btc].map do |currency|
+    %i[ethaud btcaud].map do |currency|
       Thread.new do
         send(currency)
       end
     end.map(&:value).reduce(&:merge)
   end
 
-  def btc
-    { btc: save_price(CurrencyPair.find_by(currency_1: 'BTC')) }
+  def btcaud
+    { btcaud: save_price('BTCAUD') }
   end
 
-  def eth
-    { eth: save_price(CurrencyPair.find_by(currency_1: 'ETH')) }
+  def ethaud
+    { ethaud: save_price('ETHAUD') }
   end
 
   private
 
   def request_price(currency)
-    response = RestClient.get(TICKER % currency.to_s)
+    response = RestClient.get(TICKER % currency)
     ActiveSupport::JSON.decode(response.body)
   end
 
   def save_price(currency)
     begin
       json_price = request_price(currency)
-      Price.new(
+      Price.create(
         last:          json_price["last"].to_d,
         bid:           json_price["bid"].to_d,
         ask:           json_price["ask"].to_d,
         price_at:      json_price["current_time"].to_time,
-        currency_pair: currency
-      ).tap(&:save)
+        currency:      currency
+      )
     rescue RestClient::Exception => e
-      Rails.logger.error("Problem GETting #{TICKER % currency.to_s}: #{e}")
+      Rails.logger.error("Problem GETting #{TICKER % currency}: #{e}")
       nil
     rescue ActiveRecord::ActiveRecordError => e
       Rails.logger.error("Problem saving price for #{currency}: #{e}")

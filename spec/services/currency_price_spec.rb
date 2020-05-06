@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe CurrencyPrice do
   subject { described_class.new }
   let(:response) { RestClient::Response.new }
-  describe 'btc' do
-    let!(:btc) { CurrencyPair.new(currency_1: 'BTC', currency_2: 'AUD').tap(&:save) }
+  describe 'btcaud' do
     let(:btc_price) do
       {
         'last'         => '14090.00000000',
@@ -20,10 +19,10 @@ RSpec.describe CurrencyPrice do
       end
       it 'saves the price it read' do
         expect(RestClient).to receive(:get).with(CurrencyPrice::TICKER % 'BTCAUD')
-        subject.btc
+        subject.btcaud
         saved = Price.last
         expect(saved.bid).to eq(14040.0)
-        expect(saved.currency_pair.to_s).to eq('BTCAUD')
+        expect(saved.currency).to eq('BTCAUD')
       end
     end
 
@@ -32,7 +31,7 @@ RSpec.describe CurrencyPrice do
         allow(RestClient).to receive(:get).with(CurrencyPrice::TICKER % 'BTCAUD').and_raise(RestClient::NotFound)
       end
       it 'returns currency symbol mapped to nil' do
-        expect(subject.btc).to eq({ btc: nil })
+        expect(subject.btcaud).to eq({ btcaud: nil })
       end
     end
 
@@ -45,13 +44,12 @@ RSpec.describe CurrencyPrice do
         allow(price).to receive(:save).and_raise(ActiveRecord::RecordInvalid)
       end
       it 'returns currency symbol mapped to nil' do
-        expect(subject.btc).to eq({ btc: nil })
+        expect(subject.btcaud).to eq({ btcaud: nil })
       end
     end
   end
 
-  describe 'eth' do
-    let!(:eth) { CurrencyPair.new(currency_1: 'ETH', currency_2: 'AUD').tap(&:save) }
+  describe 'ethaud' do
     let(:eth_price) do
       {
         'last'          => '318.20000000',
@@ -66,17 +64,15 @@ RSpec.describe CurrencyPrice do
         allow(response).to receive(:body).and_return(eth_price)
       end
       it 'saves the price it read' do
-        subject.eth
+        subject.ethaud
         saved = Price.last
         expect(saved.bid).to eq(317.8)
-        expect(saved.currency_pair.currency_1).to eq('ETH')
+        expect(saved.currency).to eq('ETHAUD')
       end
     end
   end
 
   describe 'call' do
-    let!(:btc) { CurrencyPair.new(currency_1: 'BTC', currency_2: 'AUD').tap(&:save) }
-    let!(:eth) { CurrencyPair.new(currency_1: 'ETH', currency_2: 'AUD').tap(&:save) }
     let(:btc_price) do
       {
         'last'         => '14090.00000000',
@@ -103,11 +99,10 @@ RSpec.describe CurrencyPrice do
       end
       it 'retrieves both prices' do
         retrieved = subject.call
-        puts "call yielded #{retrieved}"
-        expect(retrieved[:btc].bid).to eq(14040.0)
-        expect(retrieved[:btc].currency_pair.to_s).to eq('BTCAUD')
-        expect(retrieved[:eth].bid).to eq(317.8)
-        expect(retrieved[:eth].currency_pair.currency_1).to eq('ETH')
+        expect(retrieved[:btcaud].bid).to eq(14040.0)
+        expect(retrieved[:btcaud].currency).to eq('BTCAUD')
+        expect(retrieved[:ethaud].bid).to eq(317.8)
+        expect(retrieved[:ethaud].currency).to eq('ETHAUD')
       end
     end
   end

@@ -1,15 +1,18 @@
 class CurrenciesController < ApplicationController
   include Pagy::Backend
 
+  CURRENCIES = %w[BTCAUD ETHAUD]
+
   def index
-    @currencies = CurrencyPair.all
+    @currencies = CURRENCIES
+    @latest = Price.latest(CURRENCIES)
   end
 
   def history
-    @currencies = CurrencyPair.all
-    @currency = @currencies.find_by(currency_1: params[:id])
+    @currencies = CURRENCIES
+    @currency = params[:currency]
     if @currency
-      @pagy, @prices = pagy(@currency.prices, items: 20)
+      @pagy, @prices = pagy(Price.for(@currency), items: 20)
     else
       redirect_to action: 'index'
     end

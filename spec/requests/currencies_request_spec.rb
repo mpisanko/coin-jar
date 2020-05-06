@@ -16,8 +16,7 @@ RSpec.describe "Currencies", type: :request do
     end
 
     it 'returns http success' do
-      currency = CurrencyPair.new(currency_1: 'BTC', currency_2: 'AUD').tap(&:save)
-      get "/currencies/history?id=#{currency.currency_1}"
+      get "/currencies/history?currency=BTCAUD"
       expect(response).to have_http_status(:success)
     end
   end

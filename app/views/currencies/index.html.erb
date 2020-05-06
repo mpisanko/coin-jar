@@ -1,2 +1,2 @@
 <%= render partial: 'top_menu', locals: { title: 'Current Prices of CoinJar Currencies' } %>
-<%= render partial: 'currency_prices', collection: @currencies, as: 'currency' %>
+<%= render partial: 'currency_prices', collection: @latest, as: 'latest' %>
