@@ -1,16 +1,19 @@
-
 <div class="section">
-  <h1 class="heading"><%= currency %></h1>
-  <table class="text-block">
-    <thead class="center-align bold">
-      <td>Date</td>
-      <td>Last Price</td>
-      <td>Bid</td>
-      <td>Ask</td>
-    </thead>
-    <tbody>
-      <%= render partial: 'price', collection: prices, as: 'price' %>
-    </tbody>
-  </table>
-  <%= pagy_nav(@pagy).html_safe %>
+  <% if currency %>
+    <h1 class="heading"><%= currency %></h1>
+    <table class="text-block">
+      <thead class="center-align bold">
+        <td>Date</td>
+        <td>Last Price</td>
+        <td>Bid</td>
+        <td>Ask</td>
+      </thead>
+      <tbody>
+        <%= render partial: 'price', collection: prices, as: 'price' %>
+      </tbody>
+    </table>
+    <%= pagy_nav(@pagy).html_safe %>
+  <% else %>
+  <div class="text-block">No currency selected. Select one currency.</div>
+  <% end %>
 </div>
