@@ -4,6 +4,16 @@ require 'rest_client'
 class CurrencyPrice
   TICKER = 'https://data.exchange.coinjar.com/products/%s/ticker'.freeze
 
+  # In spite of GIL and Ruby's lack of REAL Threads - this HTTP requests are
+  # IO bound so it's OK to 'multithread' here
+  def call
+    %i[eth btc].map do |currency|
+      Thread.new do
+        send(currency)
+      end
+    end.map(&:value).reduce(&:merge)
+  end
+
   def btc
     { btc: save_price(CurrencyPair.find_by(currency_1: 'BTC')) }
   end
