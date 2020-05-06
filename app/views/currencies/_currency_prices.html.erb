@@ -1,11 +1,21 @@
-<div class="currency-price">
-  <div><h2><%= currency.to_s %></h2></div>
+<div class="section">
+  <h1 class="heading"><%= currency.to_s %></h1>
   <% if currency.latest %>
-    <div class="currency-row">
-      <span>Date</span>
-      <span><%= currency.latest.price_at %></span>
+    <div class="row text-block">
+      <div class="col bold">
+        <div>Date</div>
+        <div>Price</div>
+        <div>Bid</div>
+        <div>Ask</div>
+      </div>
+      <div class="col right">
+        <div><%= currency.latest.price_at %></div>
+        <div><%= currency.latest.last %></div>
+        <div><%= currency.latest.bid %></div>
+        <div><%= currency.latest.ask %></div>
+      </div>
     </div>
   <% else %>
-    <span>No data available. Click 'Capture' button.</span>
+    <div class="text-block">No data available. Click 'Capture' button.</div>
   <% end %>
 </div>

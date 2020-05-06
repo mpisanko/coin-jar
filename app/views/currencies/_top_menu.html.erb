@@ -1,10 +1,11 @@
-<div class="top">
-  <form class="capture" action="/currencies/capture" method="get">
-    <input class="capture-button" type="submit" value="Capture" />
-  </form>
+<div class="section header">
+  <h1 class="heading"><%= title %></h1>
+  <div class="div-block-2">
+    <div class="capture" onclick="window.location='/currencies/capture'">
+      <div class="text-block-4">Capture</div>
+    </div>
 
-  <form class="explain" action="/currencies/history" method="get">
-    <input class="history-button" type="submit" value="History" disabled />
+    <div class="text-block-3 bold">History</div>
     <%= render partial: 'currency_buttons', collection: @currencies, as: 'currency' %>
-  </form>
+  </div>
 </div>

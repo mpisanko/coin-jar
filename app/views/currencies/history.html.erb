@@ -1,7 +1,2 @@
-<h1>CoinJar <%= @currency %> History</h1>
-<%= render 'top_menu' %>
-<div class="content">
-  <div class="prices">
-    <%= render partial: 'prices', locals: { prices: @prices } %>
-  </div>
-</div>
+<%= render partial: 'top_menu', locals: { title: "CoinJar #{@currency} History"} %>
+<%= render partial: 'prices', locals: { prices: @prices } %>

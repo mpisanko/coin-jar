@@ -9,9 +9,8 @@ class CurrenciesController < ApplicationController
     @currencies = CurrencyPair.all
     @currency = @currencies.find_by(currency_1: params[:id])
     if @currency
-      @pagy, @prices = pagy(@currency.prices, items: 10)
+      @pagy, @prices = pagy(@currency.prices, items: 20)
     else
-      flash[:alert] = 'Please select currency to show.'
       redirect_to action: 'index'
     end
   end
