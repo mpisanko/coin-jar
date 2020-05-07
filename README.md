@@ -17,8 +17,8 @@ Other points of interest:
 Application will be delivered using Rails 6, Ruby 2.7, mysql (v.8) as relational data store for storing captured prices.
 Document store could have been chosen just as well.
 
-Only current_time, ask, bid, last will be stored as that's the requirement given. Storing full response might bring some value should the solution be extended for other purpose (but the prices are publicly available, so it's OK to throw away this information).
-Once currency pair or price record is created - it will not be updated - these are facts that do not change. They happen and cannot unhappen ;)
+Only current_time, ask, bid, last and currency will be stored as that's the requirement given. Storing full response might bring some value should the solution be extended for other purpose (but the prices are publicly available, so it's OK to throw away this information).
+Once price record is created - it will not be updated - these are facts that do not change. They happen and cannot unhappen ;)
 Price represents a stream of changes of the prices of a currency pair.
 
 ## Deliverables
